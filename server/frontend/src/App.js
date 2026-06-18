@@ -1,11 +1,20 @@
-import LoginPanel from "./components/Login/Login"
-import { Routes, Route } from "react-router-dom";
+import React from "react";
+
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<LoginPanel />} />
-    </Routes>
-  );
+  const path = window.location.pathname;
+
+  if (path.includes("register")) {
+    return <Register />;
+  }
+
+  if (path.includes("login")) {
+    return <Login />;
+  }
+
+  return <Login />;
 }
+
 export default App;
