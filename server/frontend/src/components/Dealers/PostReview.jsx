@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
@@ -15,11 +15,12 @@ const PostReview = () => {
 
   let curr_url = window.location.href;
   let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
-  let params = useParams();
-  let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let review_url = root_url+`djangoapp/add_review`;
-  let carmodels_url = root_url+`djangoapp/get_cars`;
+  let path = window.location.pathname;
+  let id = path.split("/").filter(Boolean).pop();
+
+  let dealer_url = `/djangoapp/dealer/${id}`;
+  let review_url = `/djangoapp/add_review`;
+  let carmodels_url = `/djangoapp/get_cars`;
 
   const postreview = async ()=>{
     let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");
@@ -58,7 +59,7 @@ const PostReview = () => {
 
   const json = await res.json();
   if (json.status === 200) {
-      window.location.href = window.location.origin+"/dealer/"+id;
+      window.location.href = window.location.origin + "/dealer/" + id;
   }
 
   }

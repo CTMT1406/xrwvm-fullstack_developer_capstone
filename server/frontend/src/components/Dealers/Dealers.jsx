@@ -15,31 +15,37 @@ const Dealers = () => {
   let dealer_url_by_state = "/djangoapp/get_dealers/";
  
   const filterDealers = async (state) => {
-    dealer_url_by_state = dealer_url_by_state+state;
-    const res = await fetch(dealer_url_by_state, {
-      method: "GET"
-    });
+    const url = state === "All"
+        ? "/djangoapp/get_dealers"
+        : "/djangoapp/get_dealers/" + state;
+
+    const res = await fetch(url);
     const retobj = await res.json();
-    if(retobj.status === 200) {
-      let state_dealers = Array.from(retobj.dealers)
-      setDealersList(state_dealers)
+
+    if (retobj.status === 200) {
+        setDealersList(Array.from(retobj.dealers));
     }
   }
 
-  const get_dealers = async ()=>{
+  const get_dealers = async () => {
     const res = await fetch(dealer_url, {
       method: "GET"
     });
+  
     const retobj = await res.json();
-    if(retobj.status === 200) {
-      let all_dealers = Array.from(retobj.dealers)
-      let states = [];
-      all_dealers.forEach((dealer)=>{
-        states.push(dealer.state)
+  
+    if (retobj.status === 200) {
+      let all_dealers = Array.from(retobj.dealers);
+      let state_list = [];
+  
+      all_dealers.forEach((dealer) => {
+        if (dealer.state) {
+          state_list.push(dealer.state);
+        }
       });
-
-      setStates(Array.from(new Set(states)))
-      setDealersList(all_dealers)
+  
+      setStates(Array.from(new Set(state_list)));
+      setDealersList(all_dealers);
     }
   }
   useEffect(() => {
@@ -63,8 +69,8 @@ return(
       <select name="state" id="state" onChange={(e) => filterDealers(e.target.value)}>
       <option value="" selected disabled hidden>State</option>
       <option value="All">All States</option>
-      {states.map(state => (
-          <option value={state}>{state}</option>
+      {states.map((state) => (
+        <option key={state} value={state}>{state}</option>
       ))}
       </select>        
 

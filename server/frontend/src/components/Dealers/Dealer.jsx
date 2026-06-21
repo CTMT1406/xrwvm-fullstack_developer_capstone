@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import "./Dealers.css";
 import "../assets/style.css";
 import positive_icon from "../assets/positive.png"
@@ -18,11 +18,11 @@ const Dealer = () => {
 
   let curr_url = window.location.href;
   let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
-  let params = useParams();
-  let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
-  let post_review = root_url+`postreview/${id}`;
+  let path = window.location.pathname;
+  let id = path.split("/").filter(Boolean).pop();
+  let dealer_url = `/djangoapp/dealer/${id}`;
+  let reviews_url = `/djangoapp/reviews/dealer/${id}`;
+  let post_review = `/postreview/${id}`;
   
   const get_dealer = async ()=>{
     const res = await fetch(dealer_url, {
@@ -34,6 +34,9 @@ const Dealer = () => {
       let dealerobjs = Array.from(retobj.dealer)
       setDealer(dealerobjs[0])
     }
+    console.log("id:", id);
+    console.log("dealer_url:", dealer_url);
+    console.log("dealer response:", retobj);    
   }
 
   const get_reviews = async ()=>{
