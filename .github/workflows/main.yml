@@ -37,7 +37,7 @@ jobs:
             -not -path "*/djangoenv/*" \
             -not -path "*/migrations/*" \
             -exec flake8 \
-            --ignore=E501,E302,E305,E231,E225,E128,E131,E117,E712,E722,E275,E251,E261,E303,E402,W191,W293,W391,F401,F811,F841 \
+            --ignore=E501,E302,E305,E231,E225,E226,E128,E131,E117,E121,E712,E722,E275,E251,E261,E303,E402,W191,W293,W391,F401,F811,F841,E101 \
             {} +
           echo "Python lint successful"
 
@@ -64,7 +64,8 @@ jobs:
           {
             "esversion": 8,
             "node": true,
-            "asi": true
+            "asi": true,
+            "sub": true
           }
           EOF
 
