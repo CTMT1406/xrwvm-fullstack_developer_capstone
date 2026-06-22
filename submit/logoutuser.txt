@@ -1,0 +1,2 @@
+theia@theia-chautranmanh:/home/project$ curl -X GET "https://chautranmanh-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai//djangoapp/logout"
+{"userName": ""}
