@@ -1,2 +1,0 @@
-curl -X GET "https://chautranmanh-3030.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/fetchDealer/3"
-[{"_id":"6a33ab49eb9dec341d6ba4bf","id":3,"city":"Birmingham","state":"Alabama","address":"9477 Twin Pines Center","zip":"35285","lat":"33.5446","long":"-86.9292","short_name":"Sub-Ex","full_name":"Sub-Ex Car Dealership","__v":0}]
